@@ -1,0 +1,16 @@
+echo "hello spark hello ubuntu scala is fun" > input.txt
+
+The spark-shell automatically provides a SparkContext object named sc, which your code uses. Enter this command in your terminal:
+spark-shell
+
+// 1. Load the text file into an RDD
+val rdd = sc.textFile("input.txt")
+
+// 2. Tokenize, map to pairs, and reduce by key
+val counts = rdd.flatMap(line => line.split(" ")).map(word => (word, 1)).reduceByKey(_ + _)
+
+// 3. Print the results to the console
+counts.collect().foreach(println)
+
+cd /path/to/your/spark/bin
+./spark-shell
